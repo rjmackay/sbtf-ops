@@ -33,8 +33,9 @@ Vagrant::Config.run do |config|
   # config.vm.share_folder "v-data", "/vagrant_data", "../data"
 
   # Provisioning with Shell
-  config.vm.provision :shell do |shell|
-    shell.path = "bin/bootstrap-server.sh"
-    shell.args = "vagrant@vagrant ushahidi"
-  end
+  # Doesn't quite work because it's not an interactive shell
+  #config.vm.provision :shell do |shell|
+  #  shell.path = "scripts/production-bootstrap.sh"
+  #  shell.args = "ushahidi"
+  #end
 end
