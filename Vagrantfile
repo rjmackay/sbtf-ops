@@ -9,6 +9,11 @@ Vagrant::Config.run do |config|
   # options are documented and commented below. For a complete reference,
   # please see the online documentation at vagrantup.com.
 
+  # Set memory size
+  config.vm.customize do |vm|
+    vm.memory_size = 1024
+  end
+
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box = "ubuntu-lucid-64"
 
