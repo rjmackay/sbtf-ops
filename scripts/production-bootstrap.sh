@@ -66,7 +66,7 @@ echo "done."
 
 
 # Clone the repo & run the bootstrap
-su - sbtf -c 'git clone git://github.com/StandbyTaskForce/sbtf-ops.git sbtf'
+su - sbtf -c 'git clone git://github.com/rjmackay/sbtf-ops.git sbtf --branch develop'
 su - sbtf -c "cd sbtf && sudo bash /home/sbtf/sbtf/scripts/sbtf-bootstrap.sh production"
 
 # Finish up!
