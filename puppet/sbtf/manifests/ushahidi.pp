@@ -114,4 +114,11 @@ class sbtf::ushahidi inherits sbtf::base {
         content => template("sbtf/ushahidi/cron.erb"),
     }
 
+    file {  "/var/log/ushahidi":
+        ensure  => "directory",
+        owner   => "root",
+        group   => "root",
+        mode    => 644,
+    }
+
 }
