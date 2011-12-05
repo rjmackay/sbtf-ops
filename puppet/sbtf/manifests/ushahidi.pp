@@ -14,6 +14,7 @@ class sbtf::ushahidi inherits sbtf::base {
         "php5-mcrypt",
         "php5-curl",
         "php5-imap",
+        "php5-xcache",
     ]
 
     bulkpackage { "web-packages":
@@ -76,6 +77,15 @@ class sbtf::ushahidi inherits sbtf::base {
         require => [ File["/etc/init.d/php5-fpm"], Package["php5-fpm"] ],
     }
 
+    file { "/etc/php5/conf.d/xcache.ini":
+        ensure  => "present",
+        owner   => "root",
+        group   => "root",
+        mode    => 644,
+        content => template("sbtf/php/xcache.ini.erb"),
+        require => Package["php5-xcache"],
+        notify  => Service["php5-fpm"],
+    }
 
     # Ushahidi
     exec { "checkout_ushahidi":
@@ -92,6 +102,15 @@ class sbtf::ushahidi inherits sbtf::base {
         group   => "sbtf",
         mode    => 644,
         content => template("sbtf/ushahidi/config.php.erb"),
+        require => Exec["checkout_ushahidi"],
+    }
+
+    file { "/home/sbtf/ushahidi/application/config/cache.php":
+        ensure  => "present",
+        owner   => "sbtf",
+        group   => "sbtf",
+        mode    => 644,
+        content => template("sbtf/ushahidi/cache.php.erb"),
         require => Exec["checkout_ushahidi"],
     }
 
