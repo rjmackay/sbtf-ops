@@ -30,11 +30,6 @@ class sbtf::base {
         ensure => "/usr/share/zoneinfo/UTC",
     }
 
-    # Noes!
-    package { "nano":
-        ensure => purged,
-    }
-
     # Useful
     package { [
         "git-core",                     # Needed for updating repos
