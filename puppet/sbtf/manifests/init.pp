@@ -11,7 +11,7 @@ define bulkpackage($packages) {
     }
 }
 
-define server_user($uid, $fullname, $password, $groups=[], $authorized_keys='') {
+define server_user($uid, $fullname, $password='', $groups=[], $authorized_keys='') {
     if $password == 'locked' {
         user { $name:
             ensure     => "present",
