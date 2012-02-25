@@ -89,35 +89,35 @@ class sbtf::ushahidi inherits sbtf::base {
 
     # Ushahidi
     exec { "checkout_ushahidi":
-        command => "git clone git://github.com/StandbyTaskForce/Ushahidi_Web.git ushahidi",
-        cwd     => "/home/sbtf",
-        creates => "/home/sbtf/ushahidi",
-        user    => "sbtf",
-        group   => "sbtf",
+        command => "git clone git://github.com/rjmackay/Ushahidi_Web.git ushahidi --branch deployment/ted",
+        cwd     => "/home/ushahidi",
+        creates => "/home/ushahidi/ushahidi",
+        user    => "ushahidi",
+        group   => "ushahidi",
     }
 
-    file { "/home/sbtf/ushahidi/application/config/config.php":
+    file { "/home/ushahidi/ushahidi/application/config/config.php":
         ensure  => "present",
-        owner   => "sbtf",
-        group   => "sbtf",
+        owner   => "ushahidi",
+        group   => "ushahidi",
         mode    => 644,
         content => template("sbtf/ushahidi/config.php.erb"),
         require => Exec["checkout_ushahidi"],
     }
 
-    file { "/home/sbtf/ushahidi/application/config/cache.php":
+    file { "/home/ushahidi/ushahidi/application/config/cache.php":
         ensure  => "present",
-        owner   => "sbtf",
-        group   => "sbtf",
+        owner   => "ushahidi",
+        group   => "ushahidi",
         mode    => 644,
         content => template("sbtf/ushahidi/cache.php.erb"),
         require => Exec["checkout_ushahidi"],
     }
 
     file {[
-        "/home/sbtf/ushahidi/application/cache",
-        "/home/sbtf/ushahidi/application/logs",
-        "/home/sbtf/ushahidi/media/uploads",
+        "/home/ushahidi/ushahidi/application/cache",
+        "/home/ushahidi/ushahidi/application/logs",
+        "/home/ushahidi/ushahidi/media/uploads",
         ]:
         ensure  => "directory",
         owner   => "www-data",

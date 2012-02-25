@@ -76,4 +76,4 @@ if [ $RET -gt 0 ]; then
     exit 1
 fi
 
-echo "SBTF Bootstrap done. From now on, use 'sudo ./bin/sbtf-update.sh' to keep the environment up to date"
+echo "Bootstrap done. From now on, use 'sudo ./bin/update-server.sh' to keep the environment up to date"

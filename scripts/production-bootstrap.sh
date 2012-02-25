@@ -49,10 +49,10 @@ apt-get install -qq -y git-core > /dev/null
 echo "done."
 
 
-# Add sbtf user
-echo -n "Adding sbtf user... "
-echo "sbtf  ALL=NOPASSWD: /bin/bash /home/sbtf/sbtf/scripts/sbtf-bootstrap.sh *" > /etc/sudoers.d/sbtf
-chmod 440 /etc/sudoers.d/sbtf
+# Add ushahidi user
+echo -n "Adding ushahidi user... "
+echo "ushahidi  ALL=NOPASSWD: /bin/bash /home/ushahidi/sbtf-ops/scripts/sbtf-bootstrap.sh *" > /etc/sudoers.d/ushahidi
+chmod 440 /etc/sudoers.d/ushahidi
 
 # Make sure includedir directive is present
 if ! grep includedir /etc/sudoers > /dev/null; then
@@ -61,15 +61,15 @@ if ! grep includedir /etc/sudoers > /dev/null; then
     chmod u-w /etc/sudoers
 fi
 
-useradd -c 'SBTF System User' -d /home/sbtf -m -s /bin/bash -u 5555 -U sbtf || true
+useradd -c 'Ushahidi System User' -d /home/ushahidi -m -s /bin/bash -u 5555 -U ushahidi || true
 echo "done."
 
 
 # Clone the repo & run the bootstrap
-su - sbtf -c 'git clone git://github.com/rjmackay/sbtf-ops.git sbtf --branch develop'
-su - sbtf -c "cd sbtf && sudo bash /home/sbtf/sbtf/scripts/sbtf-bootstrap.sh production"
+su - ushahidi -c 'git clone git://github.com/rjmackay/sbtf-ops.git sbtf-ops --branch develop'
+su - ushahidi -c "cd sbtf-ops && sudo bash /home/ushahidi/sbtf-ops/scripts/sbtf-bootstrap.sh production"
 
 # Finish up!
-echo "All done. Now, please set the root password, using the output of 'pwgen -s 15 1':"
-passwd
+#echo "All done. Now, please set the root password, using the output of 'pwgen -s 15 1':"
+#passwd
 echo "Build complete. Save the root password in a safe place!"
