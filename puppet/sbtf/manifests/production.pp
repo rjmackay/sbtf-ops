@@ -86,7 +86,7 @@ ushahidi   ALL=NOPASSWD: /home/ushahidi/sbtf-ops/bin/update-server.sh\n",
     server_user { "robbie":
             uid             => 2001,
             fullname        => "Robbie Mackay",
-            groups          => [ "ushahidi", "admin" ],
+            groups          => [ "ushahidi" ],
             authorized_keys => "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAsGY/zd2QS36JKh979msu1jBi8ECGG+h8uAIJuAEoT2L5R1ol7ll4j08pNd3HT/QujlSkQ0DfT2+BZPx8+GjX2hyPGFtjyzOEc9bLyHN9pcu+8S8YQTol+auq/4+Us4QQsmeDl7+DMYTid6j7r5+Dg4aBeibQqunuv08LeYx0p2ZoqvHw/oZJSQdI1Pb3xCXQjh458A3WG22CGyWCrhv5HsIxcP3udF+tDTYHFWlO19P1lPf7Q1/sGSPlwtwU3NPw7aPJPu9/k1AqnMYAlF1nS8ZEB+jCtt+cqAcYoMm6pNqQv/1A9VAUhlbQJiEVD6JxT++O5KeM/X+ZlDBFxky8mw== robbie@rjmackay1.robbiemackay.com",
     }
 }
