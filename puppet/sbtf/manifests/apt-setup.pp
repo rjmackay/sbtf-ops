@@ -65,11 +65,11 @@ deb-src $ubuntu_mirror lucid-security main universe
         notify => Exec["apt-key_nginx_ppa", "apt-get_update"],
         content => $envtype ? {
             production => "# WARNING: managed via puppet
-deb http://ppa.launchpad.net/nginx/php5/ubuntu lucid main
+deb http://ppa.launchpad.net/nginx/php5.3/ubuntu lucid main
 ",
             private => "# WARNING: managed via puppet
-deb http://ppa.launchpad.net/nginx/php5/ubuntu lucid main
-deb-src http://ppa.launchpad.net/nginx/php5/ubuntu lucid main
+deb http://ppa.launchpad.net/nginx/php5.3/ubuntu lucid main
+deb-src http://ppa.launchpad.net/nginx/php5.3/ubuntu lucid main
 ",
         },
         require => File["/etc/apt/apt.conf.d/02norecommends"],
