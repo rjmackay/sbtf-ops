@@ -5,25 +5,36 @@ class sbtf::base {
     Exec {
         path => "/usr/sbin:/usr/bin:/sbin:/bin",
     }
+    
+	# todo: add hostname here?
+    file { "/etc/hosts":
+        ensure  => "present",
+        content => "# WARNING: managed by puppet!
+127.0.0.1       localhost localhost.localdomain\n",
+        owner   => "root",
+        group   => "root",
+        mode    => "644",
+    }
 
     $repo_path = inline_template('<%= Dir.pwd %>')
 
     include sbtf::apt-setup
 
+    # Think this needs to be usr/share/i18n/supported
     # Configure locales
-    file { "/var/lib/locales/supported.d/local":
-        ensure  => "present",
-        owner   => "root",
-        group   => "root",
-        mode    => "644",
-        content => "en_US.UTF-8 UTF-8\n",
-    }
+    #file { "/var/lib/locales/supported.d/local":
+    #    ensure  => "present",
+    #    owner   => "root",
+    #    group   => "root",
+    #    mode    => "644",
+    #    content => "en_US.UTF-8 UTF-8\n",
+    #}
 
-    exec { "reconfigure_locales":
-        command     => "/usr/sbin/dpkg-reconfigure locales",
-        subscribe   => File["/var/lib/locales/supported.d/local"],
-        refreshonly => true,
-    }
+    #exec { "reconfigure_locales":
+    #    command     => "/usr/sbin/dpkg-reconfigure locales",
+    #    subscribe   => File["/var/lib/locales/supported.d/local"],
+    #    refreshonly => true,
+    #}
 
     # Configure timezone
     file { "/etc/localtime":

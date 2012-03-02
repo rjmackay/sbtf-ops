@@ -8,8 +8,8 @@
 # This script takes the presumed pristine ubuntu lucid server, and performs
 # initial bootstrapping, so that:
 #
-# 1. the sbtf user is installed;
-# 2. the SBTF repository is checked out; and
+# 1. the ushahidi user is installed;
+# 2. the sbtf-ops repository is checked out; and
 # 3. sbtf-bootstrap.sh has been run in the repository
 #
 # sbtf-bootstrap.sh then takes over and ensures the environment is correctly
@@ -21,23 +21,10 @@ if [ $(id -u) != 0 ]; then
     exit 1
 fi
 
-
-# TODO assert that machine is lucid
-
-
-# Core config
-echo -n "Doing core configuration... "
-
-echo "en_US.UTF-8 UTF-8" > /var/lib/locales/supported.d/local
-dpkg-reconfigure locales > /dev/null 2>&1
-
-rm /etc/localtime
-ln -s /usr/share/zoneinfo/UTC /etc/localtime
-
-# TODO possibly, hostname configuration
-
-echo "done."
-
+ENVIRONMENT=$1
+if [ -z "$ENVIRONMENT" ]; then
+	ENVIRONMENT="production"
+fi
 
 # Install core packages
 echo -n "Updating sources... "
@@ -64,12 +51,6 @@ fi
 useradd -c 'Ushahidi System User' -d /home/ushahidi -m -s /bin/bash -u 5555 -U ushahidi || true
 echo "done."
 
-
 # Clone the repo & run the bootstrap
 su - ushahidi -c 'git clone git://github.com/rjmackay/sbtf-ops.git sbtf-ops --branch develop'
 su - ushahidi -c "cd sbtf-ops && sudo bash /home/ushahidi/sbtf-ops/scripts/sbtf-bootstrap.sh production"
-
-# Finish up!
-#echo "All done. Now, please set the root password, using the output of 'pwgen -s 15 1':"
-#passwd
-echo "Build complete. Save the root password in a safe place!"
