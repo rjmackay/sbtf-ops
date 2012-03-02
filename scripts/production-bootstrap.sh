@@ -32,7 +32,7 @@ apt-get update -qq
 echo "done."
 
 echo -n "Installing core packages... "
-apt-get install -qq -y git-core > /dev/null
+apt-get install -y git > /dev/null
 echo "done."
 
 
